@@ -45,7 +45,7 @@ dataset$date_time <- strptime(date_time, "%d/%m/%Y %H:%M:%S")
 with(dataset, plot(date_time, Sub_metering_1, type="l" , col= "black", ylab="Energy sub metering", xlab = ""))
 with(dataset, points(date_time, Sub_metering_2, type="l", col= "red", ylab="Energy sub metering", xlab = ""))
 with(dataset, points(date_time, Sub_metering_3, type="l", col= "blue", ylab="Energy sub metering", xlab = ""))
-legend("topright", lty=1, col = c("black", "red", "blue"), legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
+legend("topright", bty="n", lty=1, col = c("black", "red", "blue"), legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
 ## generating png file and closing device
 
 dev.copy(png, file="plot3.png", width=480, height=480)

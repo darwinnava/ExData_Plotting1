@@ -2,7 +2,7 @@
 title: "Exploratory Data Analisys Course Project"
 author: "Darwin Nava"
 date: "March 25, 2021"
-file: "plot2.R"
+file: "plot3.R"
 ---
   #[Link to project on GitHUB]( https://github.com/darwinnava/ExData_Plotting1 )
   
@@ -10,8 +10,8 @@ file: "plot2.R"
   # Reconstruct plots contained in the gibhut repository available at the following link:
   # https://github.com/rdpeng/ExData_Plotting1 using the data base plotting system. 
   
-  ## 1. Required Libraries
-  library(dplyr)  # for manipulating, gruoping and chaining data
+## 1. Required Libraries
+library(dplyr)  # for manipulating, gruoping and chaining data
 library(tidyr)  # for tidying data
 library(plyr)   # for manipulating data
 library(data.table) #  for manipulating data
@@ -40,9 +40,16 @@ dataset <- read.csv.sql(f, sql = "SELECT * FROM file WHERE Date='1/2/2007' OR Da
 date_time <- paste(dataset$Date, dataset$Time)
 dataset$date_time <- strptime(date_time, "%d/%m/%Y %H:%M:%S")
 
-## creating the second graph ## days of the week are seen in spanish
-with(dataset, plot(date_time, Global_active_power,type="l" , ylab="Global Active Power (kilowatts)", xlab = ""))
+## creating the fourth graph ## days of the week are seen in spanish
+par(mfrow=c(2,2), mar=c(4,4,2,1), oma=c(0,0,2,0))
+with(dataset, plot(date_time, Global_active_power,type="l" , ylab="Global Active Power", xlab = ""))
+with(dataset, plot(date_time, Voltage, type="l" , ylab="Voltage", xlab = "datetime"))
+with(dataset, plot(date_time, Sub_metering_1, type="l" , col= "black", ylab="Energy sub metering", xlab = ""))
+with(dataset, points(date_time, Sub_metering_2, type="l", col= "red", ylab="Energy sub metering", xlab = ""))
+with(dataset, points(date_time, Sub_metering_3, type="l", col= "blue", ylab="Energy sub metering", xlab = ""))
+legend("topright", bty = "n", lty=1, col = c("black", "red", "blue"), legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
+with(dataset, plot(date_time, Global_reactive_power,type="l", xlab = "datetime"))
 
 ## generating png file and closing device
-dev.copy(png, file="plot2.png", width=480, height=480)
+dev.copy(png, file="plot4.png", width=480, height=480)
 dev.off()
